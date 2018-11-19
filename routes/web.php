@@ -19,9 +19,10 @@ Route::get('/users', function () {
     return 'Users';
 });
 
+// This route work only request with the format "user/aNumber" 
 Route::get('/user/{id}', function($id) {
     return "User's detail: {$id}";
-})->where('id','[0-9]+');
+})->where('id','[0-9]+'); // Avoid enter to other route as "user/new"
 
 Route::get('/user/new', function() {
     return 'Create new user';

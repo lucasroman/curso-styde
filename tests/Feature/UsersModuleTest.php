@@ -21,7 +21,7 @@ class UsersModuleTest extends TestCase
     {
         $this->get('/user/5')
             ->assertStatus(200)
-            ->assertSee("User's detail: 5"); // FIX!!! id MUST BE ONLY NUMBER!!!
+            ->assertSee("User's detail: 5");
     }
 
     /** @test */
