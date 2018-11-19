@@ -14,3 +14,28 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/users', function () {
+    return 'Users';
+});
+
+// This route work only request with the format "user/aNumber" 
+Route::get('/user/{id}', function($id) {
+    return "User's detail: {$id}";
+})->where('id','[0-9]+'); // Avoid enter to other route as "user/new"
+
+Route::get('/user/new', function() {
+    return 'Create new user';
+});
+
+Route::get('/greeting/{name}/{nickname?}', function($name, $nickname = null) {
+    // Convert "nAmE" to "Name"
+    $name = ucfirst(strtolower($name));
+
+    if ($nickname) {
+        $nickname = ucfirst(strtolower($nickname));
+        return "Welcome user {$name} your nickname is '{$nickname}'.";
+    } else {
+        return "Welcome user {$name} you have not nickname.";
+    }
+});
