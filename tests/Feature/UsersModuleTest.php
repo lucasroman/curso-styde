@@ -8,7 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsersModuleTest extends TestCase
 {
-
     /** @test */
     public function it_load_users_list_page()
     {
