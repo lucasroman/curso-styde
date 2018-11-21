@@ -11,9 +11,12 @@ class UsersModuleTest extends TestCase
     /** @test */
     public function it_load_users_list_page()
     {
+        /* It only guarantees that the string "Users" will appear,
+           but it will also pass with "bUsers" or "UsersSomething". */
+
         $this->get('/users')
             ->assertStatus(200)
-            ->assertSee('Users'); // Work too for substring of "Users" e.g. "rs"
+            ->assertSee('Users');
     }
 
     /** @test */
