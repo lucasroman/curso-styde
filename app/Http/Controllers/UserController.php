@@ -9,7 +9,20 @@ class UserController extends Controller
 
     public function index()
     {
-        return 'Users';
+        $users = [
+            'Sub-Zero',
+            'Reptile',
+            'Scorpion',
+            'Liu Kang',
+            'Raiden',
+            'Johnny Cage',
+            'Kitana',
+            'Shang Tsung',
+        ];
+
+        $title = 'Users list';
+
+        return view('users', compact('title', 'users'));
     }
 
     public function show($id)
