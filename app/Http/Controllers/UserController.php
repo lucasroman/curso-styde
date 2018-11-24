@@ -10,15 +10,15 @@ class UserController extends Controller
     public function index()
     {
         $users = [
-            'Sub-Zero',
-            'Reptile',
-            'Scorpion',
-            'Liu Kang',
-            'Raiden',
-            'Johnny Cage',
-            'Kitana',
-            'Shang Tsung',
-        ];
+                'Sub-Zero',
+                'Reptile',
+                'Scorpion',
+                'Liu Kang',
+                'Raiden',
+                'Johnny Cage',
+                'Kitana',
+                'Shang Tsung',
+            ];
 
         $title = 'Users list';
 
@@ -27,12 +27,16 @@ class UserController extends Controller
 
     public function show($id)
     {
-        return "User's detail: {$id}";
+        $title = "User's details";
+
+        return view('user', compact('title', 'id'));
     }
 
     public function create()
     {
-        return 'Create new user';
+        $title = 'New user';
+
+        return view('new', compact('title'));
     }
 
 }

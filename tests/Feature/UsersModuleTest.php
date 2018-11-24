@@ -10,17 +10,25 @@ class UsersModuleTest extends TestCase
 {
 
     /** @test */
-    public function it_load_users_list_page()
+    public function it_load_users_page()
     {
-        /* It only guarantees that the string "Users" will appear,
-           but it will also pass with "bUsers" or "UsersSomething". */
+       // Get the users page
+       $response = $this->json('GET', 'users');
+       // Get content from variable "users" in the view
+       $users = $response->getOriginalContent()->getData()['users'];
+       // Check if "/users" uri exist
+       $users_view = $this->get('/users')->assertStatus(200);
 
-        $this->get('/users')
-            ->assertStatus(200)
-            ->assertSee('Users')
-            ->assertSee('Sub-Zero')
-            ->assertSee('Raiden')
-            ->assertSee('Shang Tsung');
+       if ($users) {
+           /* It only guarantees that the string "Users" will appear,
+              but it will also pass with "bUsers" or "UsersSomething". */
+            $users_view->assertSee('Users')
+                ->assertSee('Sub-Zero')
+                ->assertSee('Raiden')
+                ->assertSee('Shang Tsung');
+        } else {
+            $users_view->assertSee('There are not users.');
+        }
     }
 
     /** @test */
@@ -28,7 +36,7 @@ class UsersModuleTest extends TestCase
     {
         $this->get('/user/5')
             ->assertStatus(200)
-            ->assertSee("User's detail: 5");
+            ->assertSee("User's details: 5");
     }
 
     /** @test */
