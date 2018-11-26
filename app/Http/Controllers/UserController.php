@@ -20,23 +20,19 @@ class UserController extends Controller
                 'Shang Tsung',
             ];
 
-        $title = 'Users list';
+        $title = 'Living Tower';
 
-        return view('users', compact('title', 'users'));
+        return view('users.index', compact('title', 'users'));
     }
 
     public function show($id)
     {
-        $title = "User's details";
-
-        return view('user', compact('title', 'id'));
+        return view('users.show', compact('id'));
     }
 
     public function create()
     {
-        $title = 'New user';
-
-        return view('new', compact('title'));
+        return view('users.new');
     }
 
 }
