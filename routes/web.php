@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', 'UserController@index');
+Route::get('/user/index', 'UserController@index');
 
 // This route work only request with the format "user/aNumber"
-Route::get('/user/{id}', 'UserController@show')
+Route::get('/user/show/{id}', 'UserController@show')
     ->where('id','[0-9]+'); // Avoid enter to other route as "user/new"
 
 Route::get('/user/new', 'UserController@create');

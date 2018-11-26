@@ -17,6 +17,7 @@ gulp.task('watch:tests', function() {
     gulp.watch('tests/**/*.php', ['phpunit']);  // Vigilar los test (porque primero deben fallar)
     gulp.watch('app/**/*.php', ['phpunit']);    // Vigilar Modelos y controladores
     gulp.watch('routes/**/*.php', ['phpunit']); // Vigilar Rutas
+    gulp.watch('resources/views/**/*.php', ['phpunit']) // Vigilar vistas
 });
 
 // Tarea por defecto requerida, tiene que estar. Además llama a las definidas por nosotros.

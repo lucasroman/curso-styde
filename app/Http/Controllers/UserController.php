@@ -9,17 +9,30 @@ class UserController extends Controller
 
     public function index()
     {
-        return 'Users';
+        $users = [
+                'Sub-Zero',
+                'Reptile',
+                'Scorpion',
+                'Liu Kang',
+                'Raiden',
+                'Johnny Cage',
+                'Kitana',
+                'Shang Tsung',
+            ];
+
+        $title = 'Living Tower';
+
+        return view('users.index', compact('title', 'users'));
     }
 
     public function show($id)
     {
-        return "User's detail: {$id}";
+        return view('users.show', compact('id'));
     }
 
     public function create()
     {
-        return 'Create new user';
+        return view('users.new');
     }
 
 }
