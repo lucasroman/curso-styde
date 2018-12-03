@@ -17,8 +17,6 @@
 
   <body>
 
-
-
     @include('header')
 
     <!-- Begin page content -->
