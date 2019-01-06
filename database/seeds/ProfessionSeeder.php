@@ -32,5 +32,9 @@ class ProfessionSeeder extends Seeder
         Profession::create([
             'title' => 'Web designer',
         ]);
+
+        Profession::create([
+            'title' => 'Quality assurance',
+        ]);
     }
 }

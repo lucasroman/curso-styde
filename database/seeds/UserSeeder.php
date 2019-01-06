@@ -41,18 +41,10 @@ class UserSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        User::create([
-            'name' => 'Subzero',
-            'email' => 'zero@mortal.com',
-            'password' => bcrypt('-0'),
-            'profession_id' => 1,
+        factory(User::class)->create([
+            'profession_id' => $profession_id,
         ]);
 
-        User::create([
-            'name' => 'Scorpion',
-            'email' => 'scor_mortal@mk.com.ar',
-            'password' => bcrypt('yellow ninja'),
-            'profession_id' => null,
-        ]);
+        factory(User::class, 18)->create();
     }
 }
