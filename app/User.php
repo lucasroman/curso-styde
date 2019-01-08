@@ -47,4 +47,3 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 }
-// Follow video 18 from stratch

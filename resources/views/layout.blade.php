@@ -25,15 +25,6 @@
             <div class="col-8">
                 @yield('content')
             </div>
-
-            <div class="col-4">
-                {{-- Show this section by default but you can write about
-                     something else or add something with @parent in
-                     the definition of the section --}}
-                @section('sidebar')
-                    <h2>Default sidebar</h2>
-                @show
-            </div>
         </div>
     </main>
 

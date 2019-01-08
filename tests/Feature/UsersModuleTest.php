@@ -22,9 +22,7 @@ class UsersModuleTest extends TestCase
            /* It only guarantees that the string "Users" will appear,
               but it will also pass with "bUsers" or "UsersSomething". */
             $users_view->assertSee('Living Tower')
-                ->assertSee('Sub-Zero')
-                ->assertSee('Raiden')
-                ->assertSee('Shang Tsung');
+                ->assertSee('Lucas Roman');
         } else {
             $users_view->assertSee('There are not users.');
         }

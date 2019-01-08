@@ -3,23 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
 
     public function index()
     {
-        $users = [
-                'Sub-Zero',
-                'Reptile',
-                'Scorpion',
-                'Liu Kang',
-                'Raiden',
-                'Johnny Cage',
-                'Kitana',
-                'Shang Tsung',
-            ];
-
+        $users = User::all();
         $title = 'Living Tower';
 
         return view('users.index', compact('title', 'users'));
