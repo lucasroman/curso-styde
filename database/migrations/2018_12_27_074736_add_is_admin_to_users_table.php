@@ -10,12 +10,14 @@ class AddIsAdminToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('is_admin')->after('password')->default(false);
+            $table->string('website')->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('website');
             $table->dropColumn('is_admin');
         });
     }

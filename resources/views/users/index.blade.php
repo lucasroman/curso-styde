@@ -7,7 +7,7 @@
 
     <ul>
         @forelse ($users as $user)
-            <li>{{ $user->name }}</li>
+            <li><b>{{ $user->name }}</b>, {{ $user->email}}</li>
         @empty
             <p>There are not users.</p>
         @endforelse

@@ -2,30 +2,42 @@
 
 namespace Tests\Feature;
 
+use App\User;
+use App\Profession;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsersModuleTest extends TestCase
 {
+    // Run migrations for test database (cursto_styde_tests) each time
+    use RefreshDatabase;
+
     /** @test */
     public function it_load_users_page()
     {
-       // Get the users page
-       $response = $this->json('GET', 'user/index');
-       // Get content from variable "users" in the view
-       $users = $response->getOriginalContent()->getData()['users'];
-       // Check if "/index" uri exist
-       $users_view = $this->get('user/index')->assertStatus(200);
+        /* Create the first profession, the database for tests is empty
+           so the for this profession is: id = 1 */
+        Profession::create([
+            'title' => 'Test profession',
+        ]);
 
-       if ($users) {
-           /* It only guarantees that the string "Users" will appear,
-              but it will also pass with "bUsers" or "UsersSomething". */
-            $users_view->assertSee('Living Tower')
-                ->assertSee('Lucas Roman');
-        } else {
-            $users_view->assertSee('There are not users.');
-        }
+        factory(User::class)->create([
+            'name' => 'Lucas Roman',
+            'profession_id' => 1,
+        ]);
+
+        $this->get('user/index')
+            ->assertSee('Living Tower')
+            ->assertSee('Lucas Roman');
+    }
+
+    /** @test */
+    public function user_list_empty()
+    {
+        $this->get('user/index')
+            ->assertStatus(200)
+            ->assertSee('There are not users.');
     }
 
     /** @test */

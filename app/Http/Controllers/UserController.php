@@ -10,10 +10,16 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
-        $title = 'Living Tower';
+        // One way
+        // $users = User::all();
+        // $title = 'Living Tower';
+        // return view('users.index', compact('title', 'users'));
 
-        return view('users.index', compact('title', 'users'));
+        // Other way
+        return view('users.index')->with([
+                                        'title' => 'Living Tower',
+                                        'users' => User::all()
+                                        ]);
     }
 
     public function show($id)
