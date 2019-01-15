@@ -41,15 +41,25 @@ class UsersModuleTest extends TestCase
     }
 
     /** @test */
-    public function it_load_user_details_page()
+    public function it_load_user_details()
     {
-        $this->get('user/show/5')
+        $profession = Profession::create([
+            'title' => 'Test profession',
+        ]);
+
+        $user = factory(User::class)->create([
+            'profession_id' => $profession->id,
+        ]);
+
+        $this->get('user/show/' . $user->id)
             ->assertStatus(200)
-            ->assertSee("User's details: 5");
+            ->assertSee('Name: <b>' . $user->name . '</b>')
+            ->assertSee('Email: <b>' . $user->email . '</b>')
+            ->assertSee('Profession: <b>' . $user->profession->title . '</b>');
     }
 
     /** @test */
-    public function it_load_new_user_page()
+    public function it_load_new_user()
     {
         $this->get('user/new')
             ->assertStatus(200)

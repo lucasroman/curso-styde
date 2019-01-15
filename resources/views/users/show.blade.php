@@ -1,10 +1,16 @@
 
 @extends('layout')
 
-@section('title', "User {$id} - ")
+@section('title', "User {$user->id} - ")
 
 @section('content')
-    <h1>User {{ $id }}</h1>
+    <h1>User id: {{ $user->id }}</h1>
 
-    <p>User's details: {{ $id }}</p>
+    <p>Name: <b>{{ $user->name }}</b></p>
+    <p>Email: <b>{{ $user->email }}</b></p>
+    <p>Profession: <b>{{ $user->profession->title }}</b></p>
+
+    <p>
+        <a href="{{ route('user.index') }}">List users</a>
+    </p>
 @endsection
