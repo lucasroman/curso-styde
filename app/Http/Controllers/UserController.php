@@ -15,7 +15,7 @@ class UserController extends Controller
         $title = 'Living Tower';
         return view('users.index', compact('title', 'users'));
 
-        // Other way
+        // Another way
         // return view('users.index')->with([
         //                                 'title' => 'Living Tower',
         //                                 'users' => User::all(),
@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         return view('users.show', compact('user'));
     }
