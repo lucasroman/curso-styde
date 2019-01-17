@@ -19,8 +19,8 @@ Route::get('/user/index', 'UserController@index')
     ->name('user.index');
 
 // This route work only request with the format "user/aNumber"
-Route::get('/user/show/{id}', 'UserController@show')
-    ->where('id','[0-9]+') // Avoid enter to other route as "user/new"
+Route::get('/user/show/{user}', 'UserController@show')
+    ->where('user','[0-9]+') // Avoid enter to other route as "user/new"
     ->name('user.show');
 
 Route::get('/user/new', 'UserController@create')
