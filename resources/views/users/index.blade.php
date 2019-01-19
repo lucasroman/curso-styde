@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    
+
     <ul>
         @forelse ($users as $user)
             <li>
@@ -19,10 +19,4 @@
     </ul>
 
     {{ $users->links() }} {{-- Pagination buttons --}}
-@endsection
-
-@section('sidebar')
-     @parent {{-- Original content of this section --}}
-
-    <h2>Custom sidebar</h2> {{-- Custom content of this section --}}
 @endsection
