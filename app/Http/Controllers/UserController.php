@@ -27,9 +27,13 @@ class UserController extends Controller
         return view('users.show', compact('user'));
     }
 
-    public function create()
+    public function new()
     {
         return view('users.new');
     }
 
+    public function create()
+    {
+        return 'Processing information...';
+    }
 }

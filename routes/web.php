@@ -23,8 +23,11 @@ Route::get('/user/show/{user}', 'UserController@show')
     ->where('user','[0-9]+') // Avoid enter to other route as "user/new"
     ->name('user.show');
 
-Route::get('/user/new', 'UserController@create')
-    ->name('user.create');
+Route::get('/user/new', 'UserController@new')
+    ->name('user.new');
+
+Route::post('/user/create', 'UserController@create');
+
 
 Route::get('/greeting/{name}/{nickname?}', 'WelcomeUserController')
     ->name('user.welcome');
