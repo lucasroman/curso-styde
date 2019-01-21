@@ -15,7 +15,7 @@ class ViewInterfaceTest extends TestCase
      */
     public function testHeaderBar()
     {
-        $this->get('/user/index')
+        $this->get('/users')
             ->assertStatus(200)
             ->assertSee('New user')
             ->assertSee('User ID')

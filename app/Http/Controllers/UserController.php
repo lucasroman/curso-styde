@@ -27,12 +27,12 @@ class UserController extends Controller
         return view('users.show', compact('user'));
     }
 
-    public function new()
+    public function create()
     {
-        return view('users.new');
+        return view('users.create');
     }
 
-    public function create()
+    public function store()
     {
         return 'Processing information...';
     }

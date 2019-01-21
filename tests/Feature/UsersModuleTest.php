@@ -27,7 +27,7 @@ class UsersModuleTest extends TestCase
             'profession_id' => 1,
         ]);
 
-        $this->get('user/index')
+        $this->get('users')
             ->assertSee('Living Tower')
             ->assertSee('Lucas Roman');
     }
@@ -35,7 +35,7 @@ class UsersModuleTest extends TestCase
     /** @test */
     public function user_list_empty()
     {
-        $this->get('user/index')
+        $this->get('users')
             ->assertStatus(200)
             ->assertSee('There are not users.');
     }
@@ -51,7 +51,7 @@ class UsersModuleTest extends TestCase
             'profession_id' => $profession->id,
         ]);
 
-        $this->get('user/show/' . $user->id)
+        $this->get('users/' . $user->id)
             ->assertStatus(200)
             ->assertSee('Name: <b>' . $user->name . '</b>')
             ->assertSee('Email: <b>' . $user->email . '</b>')
@@ -61,16 +61,8 @@ class UsersModuleTest extends TestCase
     /** @test */
     public function it_display_error_404_if_user_not_found()
     {
-        $this->get('user/show/10000')
+        $this->get('users/10000')
             ->assertStatus(404)
             ->assertSee('Page not found');
-    }
-
-    /** @test */
-    public function it_load_new_user()
-    {
-        $this->get('user/new')
-            ->assertStatus(200)
-            ->assertSee('Create new user');
     }
 }

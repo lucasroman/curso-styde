@@ -5,10 +5,10 @@
 @section('content')
     <h1>Create new user</h1>
 
-    <form method="POST" action="{{ url('user/create') }}">
+    <form method="POST" action="{{ url('users') }}">
         {{ csrf_field() }}
 
-        <button type="submit">User create</button>
+        <button dusk="user-create" type="submit" >User create</button>
     </form>
 
     <p>
