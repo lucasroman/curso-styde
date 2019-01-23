@@ -8,7 +8,7 @@
     <ul>
         @forelse ($users as $user)
             <li>
-                <a href="{{ route('user.show', ['id' => $user->id]) }}">
+                <a href="{{ route('users.show', ['id' => $user->id]) }}">
                     <b>{{ $user->name }}</b>
                 </a>
                 {{ $user->email }}

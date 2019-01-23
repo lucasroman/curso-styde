@@ -5,13 +5,13 @@
 @section('content')
     <h1>Create new user</h1>
 
-    <form method="POST" action="{{ url('users') }}">
+    <form method="POST" action="{{ route('users.store') }}">
         {{ csrf_field() }}
 
-        <button dusk="user-create" type="submit" >User create</button>
+        <button dusk="user-create" type="submit">User create</button>
     </form>
 
     <p>
-        <a href="{{ route('user.index') }}">List users</a>
+        <a href="{{ route('users.index') }}">List users</a>
     </p>
 @endsection

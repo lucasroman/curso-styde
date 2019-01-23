@@ -11,6 +11,6 @@
     <p>Profession: <b>{{ $user->profession->title }}</b></p>
 
     <p>
-        <a href="{{ route('user.index') }}">List users</a>
+        <a href="{{ route('users.index') }}">List users</a>
     </p>
 @endsection

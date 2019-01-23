@@ -8,13 +8,13 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('user.create') }}">New user<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{{ route('users.create') }}">New user<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('user.show', ['id' => 1])}}">User ID</a>
+          <a class="nav-link" href="{{ route('users.show', ['id' => 1])}}">User ID</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('user.index') }}">List users</a>
+          <a class="nav-link" href="{{ route('users.index') }}">List users</a>
         </li>
       </ul>
     </div>
