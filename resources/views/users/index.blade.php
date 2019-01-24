@@ -7,15 +7,16 @@
 
     <ul>
         @forelse ($users as $user)
-            <li>{{ $user }}</li>
+            <li>
+                <a href="{{ route('users.show', ['id' => $user->id]) }}">
+                    <b>{{ $user->name }}</b>
+                </a>
+                {{ $user->email }}
+            </li>
         @empty
             <p>There are not users.</p>
         @endforelse
     </ul>
-@endsection
 
-@section('sidebar')
-     @parent {{-- Original content of this section --}}
-
-    <h2>Custom sidebar</h2> {{-- Custom content of this section --}}
+    {{ $users->links() }} {{-- Pagination buttons --}}
 @endsection

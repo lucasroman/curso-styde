@@ -15,12 +15,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/index', 'UserController@index');
+// // Index --------------------------------------------
+// Route::get('/users', 'UserController@index')
+//     ->name('users.index');
+//
+// // Create -------------------------------------------
+// Route::get('/users/create', 'UserController@create')
+// ->name('users.create');
+//
+// // Store --------------------------------------------
+// Route::post('/users', 'UserController@store')
+// ->name('users.store');
+//
+// // Show ---------------------------------------------
+// // This route work only request with the format "user/aNumber"
+// Route::get('/users/{user}', 'UserController@show')
+//     ->where('user','[0-9]+') // Avoid enter to other route as "user/new"
+//     ->name('users.show');
+// --------------------------------------------------
 
-// This route work only request with the format "user/aNumber"
-Route::get('/user/show/{id}', 'UserController@show')
-    ->where('id','[0-9]+'); // Avoid enter to other route as "user/new"
+// Short way to do the same thing above
+// Route::resource('users', 'UserController')
+//     ->only(['index', 'create', 'store', 'show']);
 
-Route::get('/user/new', 'UserController@create');
+Route::resource('users', 'UserController')
+    ->except(['edit', 'update', 'destroy']);
 
-Route::get('/greeting/{name}/{nickname?}', 'WelcomeUserController');
+// --------------------------------------------------
+Route::get('/greeting/{name}/{nickname?}', 'WelcomeUserController')
+    ->name('user.welcome');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -9,30 +10,30 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = [
-                'Sub-Zero',
-                'Reptile',
-                'Scorpion',
-                'Liu Kang',
-                'Raiden',
-                'Johnny Cage',
-                'Kitana',
-                'Shang Tsung',
-            ];
-
+        // One way
+        $users = User::paginate(15);
         $title = 'Living Tower';
-
         return view('users.index', compact('title', 'users'));
+
+        // Another way
+        // return view('users.index')->with([
+        //                                 'title' => 'Living Tower',
+        //                                 'users' => User::all(),
+        //                                 ]);
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        return view('users.show', compact('id'));
+        return view('users.show', compact('user'));
     }
 
     public function create()
     {
-        return view('users.new');
+        return view('users.create');
     }
 
+    public function store()
+    {
+        return 'Processing information...';
+    }
 }
