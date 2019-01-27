@@ -65,4 +65,26 @@ class UsersModuleTest extends TestCase
             ->assertStatus(404)
             ->assertSee('Page not found');
     }
+
+    /** @test */
+    public function it_create_a_new_user()
+    {
+        // $this->withoutExceptionHandling();
+        $profession = Profession::create([
+            'title' => 'Front-end developer',
+        ]);
+
+        $this->post('users', [
+            'name' => 'John Doe',
+            'email' => 'jdoe@example.com',
+            'password' => '123',
+            'profession_id' => $profession->id,
+        ])->assertRedirect(route('users.index'));
+
+        $this->assertCredentials([
+            'name' => 'John Doe',
+            'email' => 'jdoe@example.com',
+            'password' => '123',
+        ]);
+    }
 }

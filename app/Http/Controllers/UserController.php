@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Profession;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -29,11 +30,22 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $professions = Profession::all()->sortBy('title');
+
+        return view('users.create', compact('professions'));
     }
 
     public function store()
     {
-        return 'Processing information...';
+        $data = request()->all();
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'profession_id'=> $data['profession_id'],
+        ]);
+
+        return redirect()->route('users.index');
     }
 }
