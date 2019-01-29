@@ -4,7 +4,9 @@
 @section('title', "User {$user->id} - ")
 
 @section('content')
-    <h1>User id: {{ $user->id }}</h1>
+    <h1>
+        <span class="badge badge-dark">User {{ $user->id }}</span>
+    </h1>
 
     <p>Name: <b>{{ $user->name }}</b></p>
     <p>Email: <b>{{ $user->email }}</b></p>
