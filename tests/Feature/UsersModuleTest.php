@@ -53,9 +53,9 @@ class UsersModuleTest extends TestCase
 
         $this->get('users/' . $user->id)
             ->assertStatus(200)
-            ->assertSee('Name: <b>' . $user->name . '</b>')
-            ->assertSee('Email: <b>' . $user->email . '</b>')
-            ->assertSee('Profession: <b>' . $user->profession->title . '</b>');
+            ->assertSee($user->name)
+            ->assertSee($user->email)
+            ->assertSee($user->profession->title);
     }
 
     /** @test */
@@ -85,6 +85,30 @@ class UsersModuleTest extends TestCase
             'name' => 'John Doe',
             'email' => 'jdoe@example.com',
             'password' => '123',
+        ]);
+    }
+
+    /** @test */
+    public function the_name_is_required()
+    {
+        // $this->withoutExceptionHandling();
+
+        $profession = Profession::create([
+            'title' => 'Front-end developer',
+        ]);
+
+        $this->from(route('users.create'))
+            ->post('users', [
+                'name' => '',
+                'email' => 'jdoe@example.com',
+                'password' => '123',
+                'profession_id' => $profession->id,
+            ])
+            ->assertRedirect(route('users.create'))
+            ->assertSessionHasErrors(['name' => 'The name field is required.']);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'jdoe@example.com',
         ]);
     }
 }
