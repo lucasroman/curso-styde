@@ -4,18 +4,6 @@
 
 @section('content')
 
-    <div class="col-sm-6">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul style="list-style-type:none;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
-
     <h1 class="container">Create new user</h1>
 
     <form method="POST" action="{{ route('users.store') }}">
@@ -25,13 +13,28 @@
         <div class="form-group col-sm-6">
             <label for="name">Name</label>
             <input type="text" class="form-control" name="name" id="name"
-                placeholder="John Doe">
+                placeholder="John Doe" value="{{ old('name') }}">
+
+            {{-- Show error message in the field name --}}
+            <br>
+            @if ($errors->has('name'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('name') }}
+                </div>
+            @endif
         </div>
 
         <div class="form-group col-sm-6">
             <label for="email">Email</label>
             <input type="email" class="form-control" name="email" id="email"
-                placeholder="jdoe@example.com">
+                placeholder="jdoe@example.com" value="{{ old('email') }}">
+
+            <br>
+            @if ($errors->has('email'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('email') }}
+                </div>
+            @endif
         </div>
 
         <div class="form-group col-sm-6">
@@ -45,7 +48,11 @@
             <select name="profession_id" class="form-control"
                 id="profession_id">
                 @foreach($professions as $profession)
-                    <option value={{ $profession->id }}>
+                    <option value={{ $profession->id }}
+                        {{-- Keep the profession entered previously --}}
+                        @if (old('profession_id') == $profession->id)
+                            selected
+                        @endif>
                         {{ $profession->title }}
                     </option>
                 @endforeach
