@@ -10,54 +10,36 @@
         {{-- CSRF (Cross-Site Request Forgery) is neccesary for security --}}
         @csrf
 
-        <div class="form-group col-sm-6">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" id="name"
-                placeholder="John Doe" value="{{ old('name') }}">
+        {{-- Attributes of each field in the form --}}
+        @php $fieldsAttributes = [[
+                                 'label' => 'Name',
+                                 'type' => 'text',
+                                 'name' => 'name'
+                                ],
+                                [
+                                 'label' => 'Email',
+                                 'type' => 'email',
+                                 'name' => 'email',
+                                ],
+                                [
+                                'label' => 'Password',
+                                'type' => 'password',
+                                'name' => 'password',
+                                ],
+                                [
+                                'label' => 'Profession',
+                                'name' => 'profession_id',
+                                'professions' => $professions,
+                                ]
+            ];
+        @endphp
 
-            {{-- Show error message in the field name --}}
-            <br>
-            @if ($errors->has('name'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('name') }}
-                </div>
-            @endif
-        </div>
-
-        <div class="form-group col-sm-6">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email"
-                placeholder="jdoe@example.com" value="{{ old('email') }}">
-
-            <br>
-            @if ($errors->has('email'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('email') }}
-                </div>
-            @endif
-        </div>
-
-        <div class="form-group col-sm-6">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password"
-                id="password" placeholder="my pass">
-        </div>
-
-        <div class="form-group col-sm-6">
-            <label for="profession_id">Profession</label>
-            <select name="profession_id" class="form-control"
-                id="profession_id">
-                @foreach($professions as $profession)
-                    <option value={{ $profession->id }}
-                        {{-- Keep the profession entered previously --}}
-                        @if (old('profession_id') == $profession->id)
-                            selected
-                        @endif>
-                        {{ $profession->title }}
-                    </option>
-                @endforeach
-            </select><br>
-        </div>
+        {{-- Loop for create each field in the form--}}
+        @foreach($fieldsAttributes as $field )
+            @component('users.fieldComponent', $field)
+                You have not access to this component!
+            @endcomponent
+        @endforeach
 
         <div class="col-sm-6 text-center">
             <button dusk="user-create" type="submit" class="btn btn-primary">
