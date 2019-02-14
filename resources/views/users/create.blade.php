@@ -11,34 +11,23 @@
         @csrf
 
         {{-- Attributes of each field in the form --}}
-        @php $fieldsAttributes = [[
-                                 'label' => 'Name',
-                                 'type' => 'text',
-                                 'name' => 'name'
-                                ],
-                                [
-                                 'label' => 'Email',
-                                 'type' => 'email',
-                                 'name' => 'email',
-                                ],
-                                [
-                                'label' => 'Password',
-                                'type' => 'password',
-                                'name' => 'password',
-                                ],
-                                [
-                                'label' => 'Profession',
-                                'name' => 'profession_id',
-                                'professions' => $professions,
-                                ]
+        @php $fieldsAttributes = [
+            [ 'label' => 'Name', 'type' => 'text', 'name' => 'name' ],
+            [ 'label' => 'Email', 'type' => 'email', 'name' => 'email', ],
+            [ 'label' => 'Password', 'type' => 'password',
+                'name' => 'password', ],
+            [ 'label' => 'Profession', 'name' => 'profession_id',
+                'professions' => $professions, ]
             ];
         @endphp
 
         {{-- Loop for create each field in the form--}}
         @foreach($fieldsAttributes as $field )
-            @component('users.fieldComponent', $field)
+            {{-- The component @field is definded in formField.blade.php
+            and its alias is definded in AppServiceProvider --}}
+            @field($field)
                 You have not access to this component!
-            @endcomponent
+            @endfield
         @endforeach
 
         <div class="col-sm-6 text-center">
