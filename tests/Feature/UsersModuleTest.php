@@ -23,6 +23,8 @@ class UsersModuleTest extends TestCase
 
         $this->user = factory(User::class)->create([
             'name' => 'Test user fixture',
+            'email' => 'userfixture@example.com',
+            'password' => '123456', // Password min: 6 characters
             'profession_id' => $this->profession->id,
         ]);
 
@@ -76,14 +78,14 @@ class UsersModuleTest extends TestCase
         $this->post('users', [
             'name' => 'John Doe',
             'email' => 'jdoe@example.com',
-            'password' => '123',
+            'password' => '123456', // Password min: 6 characters
             'profession_id' => $this->profession->id,
         ])->assertRedirect(route('users.index'));
 
         $this->assertCredentials([
             'name' => 'John Doe',
             'email' => 'jdoe@example.com',
-            'password' => '123',
+            'password' => '123456',
         ]);
     }
 
@@ -93,15 +95,85 @@ class UsersModuleTest extends TestCase
         $this->from(route('users.create'))
             ->post('users', [
                 'name' => '',
-                'email' => 'jdoe@example.com',
-                'password' => '123',
-                'profession_id' => $this->profession->id,
             ])
             ->assertRedirect(route('users.create'))
+            /* Is not necessary to specific the message asociated if you use
+               the default message (see the test for email required) */
             ->assertSessionHasErrors(['name' => 'The name field is required.']);
 
         $this->assertDatabaseMissing('users', [
             'email' => 'jdoe@example.com',
         ]);
+    }
+
+    /** @test */
+    public function the_email_is_required()
+    {
+        $this->from(route('users.create'))
+            ->post('users', [
+                'email' => '',
+            ])
+            ->assertRedirect(route('users.create'))
+            /* Is not necessary to specify a message if you use the default
+               message */
+            ->assertSessionHasErrors(['email']);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => '',
+        ]);
+    }
+
+    /** @test */
+    public function the_password_is_required()
+    {
+        $this->from(route('users.create'))
+            ->post('users', [
+                'password' => '',
+            ])
+            ->assertRedirect(route('users.create'))
+            ->assertSessionHasErrors(['password']);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'jdoe@example.com',
+        ]);
+    }
+
+    /** @test */
+    public function the_email_must_be_valid()
+    {
+        $this->from(route('users.create'))
+            ->post('users', [
+                'email' => 'invalidEmail',
+            ])
+            ->assertRedirect(route('users.create'))
+            ->assertSessionHasErrors(['email']);
+
+        $this->assertDatabaseMissing('users', [
+            'name' => 'Test user',
+        ]);
+    }
+
+    /** @test */
+    public function the_email_must_be_unique()
+    {
+        $this->from(route('users.create'))
+            ->post('users', [
+                'email' => 'userfixture@example.com',
+            ])
+            ->assertRedirect(route('users.create'))
+            ->assertSessionHasErrors(['email']);
+
+        $this->assertEquals(1, User::count());
+    }
+
+    /** @test */
+    public function the_password_must_be_greater_or_equal_to_six()
+    {
+        $this->from(route('users.create'))
+            ->post('users', [
+                'password' => 'less6', // Invalid password (shorter length 6)
+            ])
+            ->assertRedirect(route('users.create'))
+            ->assertSessionHasErrors(['password']);
     }
 }
