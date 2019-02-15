@@ -12,12 +12,12 @@
 
         {{-- Attributes of each field in the form --}}
         @php $fieldsAttributes = [
-            [ 'label' => 'Name', 'type' => 'text', 'name' => 'name' ],
-            [ 'label' => 'Email', 'type' => 'email', 'name' => 'email', ],
-            [ 'label' => 'Password', 'type' => 'password',
-                'name' => 'password', ],
-            [ 'label' => 'Profession', 'name' => 'profession_id',
-                'professions' => $professions, ]
+            ['label' => 'Name', 'type' => 'text', 'name' => 'name'],
+            ['label' => 'Email', 'type' => 'email', 'name' => 'email'],
+            ['label' => 'Password', 'type' => 'password',
+                'name' => 'password'],
+            ['label' => 'Profession', 'name' => 'profession_id',
+                'professions' => $professions]
             ];
         @endphp
 

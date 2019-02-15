@@ -39,8 +39,8 @@ class UserController extends Controller
     {
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => '',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
             'profession_id' => '',
         ]);
 
