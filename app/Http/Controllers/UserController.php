@@ -30,9 +30,20 @@ class UserController extends Controller
 
     public function create()
     {
+        /* This user will not be saved, it is only useful for creation
+        and editing views that work in the same way. The component to represent
+        a form will always receive a user (empty or not) to create and edit
+        views respectively */
+        $user = User::make([
+            'name' => '',
+            'email' => '',
+            'password' => '',
+            'profession_id' => '',
+        ]);
+
         $professions = Profession::all()->sortBy('title');
 
-        return view('users.create', compact('professions'));
+        return view('users.create', compact('professions', 'user'));
     }
 
     public function store()
@@ -52,5 +63,12 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index');
+    }
+
+    public function edit(User $user)
+    {
+        $professions = Profession::all()->sortBy('title');
+
+        return view('users.edit', compact('user', 'professions'));
     }
 }
