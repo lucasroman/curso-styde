@@ -12,6 +12,9 @@
                     <b>{{ $user->name }}</b>
                 </a>
                 {{ $user->email }}
+                <a href="{{ route('users.edit', ['id' => $user->id]) }}">
+                    <b>Edit</b>
+                </a>
             </li>
         @empty
             <p>There are not users.</p>

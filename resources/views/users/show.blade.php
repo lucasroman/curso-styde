@@ -13,6 +13,12 @@
     <p>Profession: <b>{{ $user->profession->title }}</b></p>
 
     <p>
-        <a href="{{ route('users.index') }}">List users</a>
+        <a href="{{ route('users.index') }}">
+            <button class="btn btn-primary">List users</button>
+        </a>
+
+        <a href="{{ route('users.edit', ['id' => $user->id]) }}">
+            <button class="btn btn-primary">Edit user</button>
+        </a>
     </p>
 @endsection
