@@ -176,4 +176,15 @@ class UsersModuleTest extends TestCase
             ->assertRedirect(route('users.create'))
             ->assertSessionHasErrors(['password']);
     }
+
+    /** @test */
+    public function it_load_the_edit_user_page()
+    {
+        // $this->withoutExceptionHandling();
+        $this->get("users/{$this->user->id}/edit")
+            ->assertStatus(200)
+            ->assertViewIs('users.edit')
+            ->assertSee('Edit user')
+            ->assertViewHas('user');
+    }
 }
