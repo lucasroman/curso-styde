@@ -39,7 +39,7 @@ Route::get('/', function () {
 //     ->only(['index', 'create', 'store', 'show']);
 
 Route::resource('users', 'UserController')
-    ->except(['edit', 'update', 'destroy']);
+    ->except(['update', 'destroy']);
 
 // --------------------------------------------------
 Route::get('/greeting/{name}/{nickname?}', 'WelcomeUserController')
