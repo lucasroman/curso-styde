@@ -13,8 +13,7 @@ class UserController extends Controller
     {
         // One way
         $users = User::paginate(15);
-        $title = 'Living Tower';
-        return view('users.index', compact('title', 'users'));
+        return view('users.index', compact('users'));
 
         // Another way
         // return view('users.index')->with([
