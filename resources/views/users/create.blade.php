@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="container">Create new user</h1>
+    <h1 class="container">{{ __('messages.user_new') }}</h1>
 
     <form method="POST" action="{{ route('users.store') }}">
         {{-- CSRF (Cross-Site Request Forgery) is neccesary for security --}}
@@ -12,11 +12,13 @@
 
         {{-- Attributes of each field in the form --}}
         @php $fieldsAttributes = [
-            ['label' => 'Name', 'type' => 'text', 'name' => 'name', 'user' => $user],
-            ['label' => 'Email', 'type' => 'email', 'name' => 'email', 'user' => $user],
-            ['label' => 'Password', 'type' => 'password',
+            ['label' => __('messages.name'), 'type' => 'text',
+                'name' => 'name', 'user' => $user],
+            ['label' => __('messages.email'), 'type' => 'email',
+                'name' => 'email', 'user' => $user],
+            ['label' => __('messages.password'), 'type' => 'password',
                 'name' => 'password', 'user' => $user],
-            ['label' => 'Profession', 'name' => 'profession_id',
+            ['label' => __('messages.profession'), 'name' => 'profession_id',
                 'professions' => $professions, 'user' => $user]
             ];
         @endphp

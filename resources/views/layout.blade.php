@@ -30,7 +30,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">Developed by Lucas Roman</span>
+        <span class="text-muted">{{ __('messages.developed_by') }}</span>
       </div>
     </footer>
 

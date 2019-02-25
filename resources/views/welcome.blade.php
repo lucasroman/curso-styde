@@ -80,6 +80,9 @@
             @endif
 
             <div class="content">
+                <p>{{ __('messages.welcome') }}</p>
+                <p>{{ __('I love programming.') }}</p>
+                <p>{{ trans_choice('messages.apples', 0) }}</p>
                 <div class="title m-b-md">
                     Laravel
                 </div>

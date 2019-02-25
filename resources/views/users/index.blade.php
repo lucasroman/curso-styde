@@ -3,8 +3,7 @@
 @section('title', 'User list - ')
 
 @section('content')
-    <h1>{{ $title }}</h1>
-
+    <h1>{{ __('messages.living') }}</h1>
     <ul>
         @forelse ($users as $user)
             <li>
@@ -13,7 +12,7 @@
                 </a>
                 {{ $user->email }}
                 <a href="{{ route('users.edit', ['id' => $user->id]) }}">
-                    <b>Edit</b>
+                    <b>{{ __('messages.user_edit') }}</b>
                 </a>
             </li>
         @empty
