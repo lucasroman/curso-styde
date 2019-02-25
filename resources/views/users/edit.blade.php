@@ -9,7 +9,8 @@
     <form method="POST" action="{{ route('users.store') }}">
         {{-- CSRF (Cross-Site Request Forgery) is neccesary for security --}}
         @csrf
-
+        {{-- Add a hidden field for put or patch --}}
+        @method('PUT')
         {{-- Attributes of each field in the form --}}
         @php $fieldsAttributes = [
             ['label' => 'Name', 'type' => 'text', 'name' => 'name',
