@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Other way form return a view
+// Route::view('/', 'welcome');
+
+
 // // Index --------------------------------------------
 // Route::get('/users', 'UserController@index')
 //     ->name('users.index');
@@ -38,9 +42,11 @@ Route::get('/', function () {
 // Route::resource('users', 'UserController')
 //     ->only(['index', 'create', 'store', 'show']);
 
-Route::resource('users', 'UserController')
-    ->except(['update', 'destroy']);
+ Route::resource('users', 'UserController')->except(['update', 'destroy']);
 
 // --------------------------------------------------
 Route::get('/greeting/{name}/{nickname?}', 'WelcomeUserController')
     ->name('user.welcome');
+
+// Select language
+Route::get('lang/{locale}', 'LocalizationController')->name('language');
