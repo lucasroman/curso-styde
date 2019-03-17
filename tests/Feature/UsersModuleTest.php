@@ -24,7 +24,14 @@ class UsersModuleTest extends TestCase
         $this->user = factory(User::class)->create([
             'name' => 'Test user fixture',
             'email' => 'userfixture@example.com',
-            'password' => '123456', // Password min: 6 characters
+            'password' => bcrypt('123456'), // Password min: 6 characters
+            'profession_id' => $this->profession->id,
+        ]);
+
+        $this->user2 = factory(User::class)->create([
+            'name' => 'Tes user fixture 2',
+            'email' => 'user2@fixture.com',
+            'password' => 'user2pass',
             'profession_id' => $this->profession->id,
         ]);
 
@@ -163,7 +170,7 @@ class UsersModuleTest extends TestCase
             ->assertRedirect(route('users.create'))
             ->assertSessionHasErrors(['email']);
 
-        $this->assertEquals(1, User::count());
+        $this->assertEquals(2, User::count());
     }
 
     /** @test */
@@ -180,11 +187,86 @@ class UsersModuleTest extends TestCase
     /** @test */
     public function it_load_the_edit_user_page()
     {
-        // $this->withoutExceptionHandling();
         $this->get("users/{$this->user->id}/edit")
             ->assertStatus(200)
             ->assertViewIs('users.edit')
             ->assertSee('Edit user')
             ->assertViewHas('user');
+    }
+
+    /** @test */
+    function it_update_a_user()
+    {
+        $this->put("users/{$this->user->id}", [
+            'name' => 'Update name',
+            'email' => 'updatedemail@something.com',
+            'password' => '123456',
+        ])->assertRedirect(route('users.show', ['user' => $this->user]));
+
+        $this->assertCredentials([
+            'name' => 'Update name',
+            'email' => 'updatedemail@something.com',
+            'password' => '123456',
+        ]);
+    }
+
+    /** @test */
+    function the_name_is_required_when_updating_a_user()
+    {
+        $this->from("users/{$this->user->id}/edit")
+            ->put("users/{$this->user->id}", [
+                'name' => '',
+        ])->assertRedirect("users/{$this->user->id}/edit")
+        ->assertSessionHasErrors(['name' => 'The name field is required.']);
+
+        $this->assertDatabaseMissing('users',
+            ['email' => 'updatedemail@something.com']);
+    }
+
+    /** @test */
+    public function the_email_must_be_valid_when_updating()
+    {
+        $this->from("users/{$this->user->id}/edit")
+            ->put("users/{$this->user->id}", [
+                'name' => 'Name edited',
+                'email' => 'invalidemail',
+                'password' => '123456',
+        ])->assertRedirect(route('users.edit', ['user' => $this->user]))
+        ->assertSessionHasErrors(['email']);
+
+        $this->assertDatabaseMissing('users',
+            ['name' => 'Name edited']);
+    }
+
+    /** @test */
+    public function the_email_must_be_unique_when_updating()
+    {
+        // If try assign the email of user2 to user1 should back to update view
+        $this->from("users/{$this->user->id}/edit")
+            ->put("users/{$this->user->id}", [
+                'email' => 'user2@fixture.com',
+            ])
+            ->assertRedirect(route('users.edit', ['user' => $this->user]))
+            ->assertSessionHasErrors(['email']);
+
+            $this->assertEquals(2, User::count());
+    }
+
+    /** @test */
+    public function the_password_is_optional_when_updating()
+    {
+        $this->from("users/{$this->user->id}/edit")
+            ->put("users/{$this->user->id}", [
+                'name' => 'Same name',
+                'email' => 'sameEmail@example.com',
+                'password' => '',  // This is the only attribute changed
+            ])
+            ->assertRedirect(route('users.show', ['user' => $this->user]));
+
+        $this->assertCredentials([
+            'name' => 'Same name',
+            'email' => 'sameEmail@example.com',
+            'password' => '123456',
+        ]);
     }
 }
