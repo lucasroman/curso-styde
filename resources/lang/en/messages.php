@@ -6,6 +6,7 @@ return [
     'user_id' => 'User ID',
     'user_list' => 'List users',
     'user_edit' => 'Edit user',
+    'save' => 'Save',
     'name' => 'Name',
     'email' => 'Email',
     'password' => 'Password',
