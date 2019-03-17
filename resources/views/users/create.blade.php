@@ -34,7 +34,7 @@
 
         <div class="col-sm-6 text-center">
             <button dusk="user-create" type="submit" class="btn btn-primary">
-                Save
+                {{ (__('messages.save'))}}
             </button>
         </div>
     </form>
@@ -42,7 +42,7 @@
     <br>
     <div class="col-sm-6 text-center">
         <a class="btn btn-link" href="{{ route('users.index') }}">
-            Back to list users
+            {{ __('messages.user_list')}}
         </a>
     </div>
 
