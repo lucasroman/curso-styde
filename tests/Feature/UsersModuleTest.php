@@ -269,4 +269,21 @@ class UsersModuleTest extends TestCase
             'password' => '123456',
         ]);
     }
+
+    /** @test */
+    public function the_email_can_stay_same_when_updating()
+    {
+        $this->from("users/{$this->user->id}/edit")
+            ->put("users/{$this->user->id}", [
+                'name' => 'New name',
+                'email' => 'userfixture@example.com', // keep the same email
+                'password' => '123456',
+            ])
+            ->assertRedirect(route('users.show', ['user' => $this->user]));
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'New name',
+            'email' => 'userfixture@example.com',
+        ]);
+    }
 }
