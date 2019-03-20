@@ -42,7 +42,7 @@ Route::get('/', function () {
 // Route::resource('users', 'UserController')
 //     ->only(['index', 'create', 'store', 'show']);
 
- Route::resource('users', 'UserController')->except(['destroy']);
+ Route::resource('users', 'UserController');
 
 // --------------------------------------------------
 Route::get('/greeting/{name}/{nickname?}', 'WelcomeUserController')
