@@ -290,14 +290,13 @@ class UsersModuleTest extends TestCase
     /** @test */
     public function it_delete_a_user()
     {
-        // $this->withoutExceptionHandling();
         $this->delete("users/{$this->user->id}")
             ->assertRedirect(route('users.index'));
 
         $this->assertDatabaseMissing('users', [
             'id' => $this->user->id,
         ]);
-        // To do same that the previous test 
+        // To do same that the previous test
         $this->assertSame(1, User::count());
     }
 }

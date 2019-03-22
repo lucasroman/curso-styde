@@ -6,7 +6,7 @@
     <h1 class="container">{{ __('messages.user_edit')}}</h1>
 
     {{-- CHANGE STORE FOR UPDATE!!!!! this view is for edit a existing user --}}
-    <form method="POST" action="{{ route('users.update', ['user' => $user]) }}">
+    <form method="POST" action="{{ route('users.update', $user) }}">
         {{-- CSRF (Cross-Site Request Forgery) is neccesary for security --}}
         @csrf
         {{-- Add a hidden field for spoof html verbs for update --}}

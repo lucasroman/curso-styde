@@ -19,7 +19,7 @@
             </button>
         </a>
 
-        <a href="{{ route('users.edit', ['id' => $user->id]) }}">
+        <a href="{{ route('users.edit', $user) }}">
             <button class="btn btn-primary">
                 {{ __('messages.user_edit')}}
             </button>
