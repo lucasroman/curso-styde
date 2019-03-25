@@ -4,32 +4,55 @@
 
 @section('content')
     <h1>{{ __('messages.living') }}</h1>
-    <ul>
-        @forelse ($users as $user)
-            <li>
-                <a href="{{ route('users.show', $user) }}">
-                    <b>{{ $user->name }}</b>
-                </a>
 
-                {{ $user->email }}
+    @if ($users->isNotEmpty())
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach ($users as $user)
+                  <tr>
+                      <th scope="row">{{ $user->id }}</th>
 
-                <a href="{{ route('users.edit', $user) }}">
-                    <b>{{ __('messages.user_edit') }}</b>
-                </a>
+                      <td>
+                          <a href="{{ route('users.show', $user) }}">
+                              <b>{{ $user->name }}</b>
+                          </a>
+                      </td>
 
-                <form action="{{ route('users.destroy', $user) }}"
-                    method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">
-                        <b>Delete</b>
-                    </button>
-                </form>
-            </li>
-        @empty
-            <p>There are not users.</p>
-        @endforelse
-    </ul>
+                      <td>
+                          {{ $user->email }}
+                      </td>
+
+                      <td>
+                          <form action="{{ route('users.destroy', $user) }}"
+                              method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <a href="{{ route('users.show', $user) }}"
+                                <span class="oi oi-eye btn btn-link"></span>
+                              </a>
+                              <a href="{{ route('users.edit', $user) }}"
+                                <span class="oi oi-pencil btn btn-link"></span>
+                              </a>
+                              <button type="submit" class="btn btn-link">
+                                  <span class="oi oi-trash"></span>
+                              </button>
+                          </form>
+                      </td>
+                  </tr>
+              @endforeach
+          </tbody>
+        </table>
+    @else
+        <p>There are not users.</p>
+    @endif
 
     {{ $users->links() }} {{-- Pagination buttons --}}
 @endsection
