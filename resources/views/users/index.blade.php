@@ -24,7 +24,6 @@
                     <button type="submit">
                         <b>Delete</b>
                     </button>
-
                 </form>
             </li>
         @empty
