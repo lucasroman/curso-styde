@@ -3,7 +3,7 @@
 to work, this one should always receive a user. Empty in the case of creating
 and full in the case of editing.--}}
 
-<div class="form-group col-sm-6">
+<div class="form-group ">
     <label for={{ $name }}>{{ $label }}</label>
 
     @if ($name !== 'profession_id' )

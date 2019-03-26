@@ -29,7 +29,7 @@
             </div>
         </div>
     </main>
-
+    <br>
     <footer class="footer">
       <div class="container">
         <span class="text-muted">{{ __('messages.developed_by') }}</span>
