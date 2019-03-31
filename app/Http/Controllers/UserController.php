@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Profession;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,8 +13,7 @@ class UserController extends Controller
     {
         // One way
         $users = User::paginate(15);
-        $title = 'Living Tower';
-        return view('users.index', compact('title', 'users'));
+        return view('users.index', compact('users'));
 
         // Another way
         // return view('users.index')->with([
@@ -29,11 +29,72 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        /* This user will not be saved, it is only useful for creation
+        and editing views that work in the same way. The component to represent
+        a form will always receive a user (empty or not) to create and edit
+        views respectively */
+        $user = User::make([
+            'name' => '',
+            'email' => '',
+            'password' => '',
+            'profession_id' => '',
+        ]);
+
+        $professions = Profession::all()->sortBy('title');
+
+        return view('users.create', compact('professions', 'user'));
     }
 
     public function store()
     {
-        return 'Processing information...';
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'profession_id' => '',
+        ]);
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'profession_id'=> $data['profession_id'],
+        ]);
+
+        return redirect()->route('users.index');
+    }
+
+    public function edit(User $user)
+    {
+        $professions = Profession::all()->sortBy('title');
+
+        return view('users.edit', compact('user', 'professions'));
+    }
+
+    public function update(User $user)
+    {
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => '',
+            'profession_id' => '',
+        ]);
+
+        if ($data['password'] != null) {
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('users.show', $user);
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('users.index');
     }
 }

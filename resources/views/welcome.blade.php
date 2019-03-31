@@ -62,6 +62,22 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        {{-- Map styles --}}
+        <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+
+        {{-- Map style class --}}
+        <style>
+         .map {
+           height: 400px;
+           width: 70%;
+           text-align: center;
+           margin: auto;
+         }
+        </style>
+
+        {{-- OpenStreetMap (library OpenLayers) --}}
+        <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -80,6 +96,9 @@
             @endif
 
             <div class="content">
+                <p>{{ __('messages.welcome') }}</p>
+                <p>{{ __('I love programming.') }}</p>
+                <p>{{ trans_choice('messages.apples', 0) }}</p>
                 <div class="title m-b-md">
                     Laravel
                 </div>
@@ -92,7 +111,24 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+
             </div>
         </div>
+        <div id="map" class="map"></div>
+
+        <script type="text/javascript">
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([299.30,-31.6]),
+                zoom: 14
+            })
+        });
+        </script>
     </body>
 </html>

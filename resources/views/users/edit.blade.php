@@ -1,16 +1,19 @@
 @extends('layout')
 
-@section('title', 'User create - ')
+@section('title', 'User edit - ')
 
 @section('content')
     <div class="card">
-        <h4 class="card-header">{{ __('messages.user_new') }}</h4>
+        <h4 class="card-header">{{ __('messages.user_edit') }}</h4>
         <div class="card-body">
-            <form method="POST" action="{{ route('users.store') }}">
+            {{-- CHANGE STORE FOR UPDATE!!!!! this view is for edit a existing
+                 user --}}
+            <form method="POST" action="{{ route('users.update', $user) }}">
                 {{-- CSRF (Cross-Site Request Forgery) is neccesary for
                      security --}}
                 @csrf
-
+                {{-- Add a hidden field for spoof html verbs for update --}}
+                @method('PUT')
                 {{-- Attributes of each field in the form --}}
                 @php $fieldsAttributes = [
                     ['label' => __('messages.name'), 'type' => 'text',
@@ -37,15 +40,10 @@
                 <div class="text-center">
                     <button dusk="user-create" type="submit"
                         class="btn btn-primary">
-                        {{ (__('messages.save'))}}
+                        {{ __('messages.save') }}
                     </button>
                 </div>
             </form>
-
-            <div class="text-center">
-                <a class="btn btn-link" href="{{ route('users.index') }}">
-                    {{ __('messages.user_list')}}
-                </a>
-            </div>
         </div>
+    </div>
 @endsection
