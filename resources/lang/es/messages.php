@@ -13,5 +13,5 @@ return [
     'profession' => 'Profesión',
     'developed_by' => 'Desarrollado por Lucas Roman',
     'welcome' => 'Hola!',
-    'living' => 'Torre viviente',
+    'living' => 'Torre Viviente',
 ];
