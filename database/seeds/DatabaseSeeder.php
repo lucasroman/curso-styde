@@ -23,13 +23,17 @@ class DatabaseSeeder extends Seeder
 
     protected function truncateTables(array $tables)
     {
+        // With mySQL: uncomment lines DB::statement...
+        // With Postgre: leave comment the lines with DB::statment...
+        // The foreign key check only happen in mySQL databases
+
         // Disable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
         // Delete all records on each $table
         foreach ($tables as $table) {
             DB::table($table)->truncate();
         }
         // Enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }
 }
