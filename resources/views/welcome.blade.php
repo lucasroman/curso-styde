@@ -96,22 +96,17 @@
             @endif
 
             <div class="content">
-                <p>{{ __('messages.welcome') }}</p>
-                <p>{{ __('I love programming.') }}</p>
-                <p>{{ trans_choice('messages.apples', 0) }}</p>
                 <div class="title m-b-md">
-                    Laravel
+                    Curso Styde
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ route('users.index') }}">
+                        <button type="button">
+                                {{ __('messages.user_list') }}
+                        </button>
+                    </a>
                 </div>
-
             </div>
         </div>
         <div id="map" class="map"></div>
