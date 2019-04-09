@@ -10,9 +10,9 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Actions</th>
+              <th scope="col">{{ __('messages.name') }}</th>
+              <th scope="col">{{ __('messages.email') }}</th>
+              <th scope="col">{{ __('messages.actions') }}</th>
             </tr>
           </thead>
           <tbody>
