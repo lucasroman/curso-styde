@@ -14,6 +14,7 @@ return [
     'developed_by' => 'Developed by Lucas Roman',
     'welcome' => 'Hello!',
     'living' => 'Living Tower',
+    'actions' => 'Actions',
 
     'apples' => '{0}There is one apple|[2,*]There are many apples',
 ];

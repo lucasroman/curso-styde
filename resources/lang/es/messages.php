@@ -14,4 +14,5 @@ return [
     'developed_by' => 'Desarrollado por Lucas Roman',
     'welcome' => 'Hola!',
     'living' => 'Torre Viviente',
+    'actions' => 'Acciones',
 ];

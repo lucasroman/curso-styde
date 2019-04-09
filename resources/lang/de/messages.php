@@ -14,4 +14,5 @@ return [
     'developed_by' => 'Entwickelt von Lucas Roman',
     'welcome' => 'herzlich willkommen',
     'living' => 'Lebender Turm',
+    'actions' => 'Aktionen',
 ];
